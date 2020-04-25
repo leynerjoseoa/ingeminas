@@ -1,0 +1,189 @@
+{% load static %}
+{% load has_group %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>INGESISTEMAS</title>
+        <link rel="shortcut icon" href="{% static '/images/favicon.png' %}"/>
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!--FONTAWESOME-->
+    <script src="https://kit.fontawesome.com/2a82ed09c6.js" crossorigin="anonymous"></script>
+    <!--OWN STYLES-->
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+</head>
+<body>
+    <style>
+
+        .menu li {
+            display: inline;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .menu li > div {
+            font-family: Arial;
+            float: left;
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+
+
+    </style>
+     <style>
+        .icons-fontawesome-menu {
+            float: right;
+        }
+
+        .padding-menu-vertical {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+
+        .padding-menu-vertical > a {
+            padding-left: 0px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            opacity: 0.6;
+        }
+
+        .boton-menu:hover {
+        {% comment %}    background-color: whitesmoke !important;
+            margin-left: 30px !important;{% endcomment %} background-color: #ebeff5 !important;
+        }
+    </style>
+    <style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+</style>
+{% include 'accounts/navbar.html' %}
+
+        <div>
+            <ul class="menu">
+                <li>
+
+                    <div class=" col-md-2">
+                         {% if request.user.egresado %}
+                                <!--menu para egresados-->
+                             <div class="accordion" id="accordionExample">
+
+                            <div class="card">
+                                <div class="card-header text-secondary collapsed" id="heading-perfil" type="button"
+                                     data-toggle="collapse"
+                                     data-target="#collapseOne" aria-expanded="false">
+                                    <span>Perfil</span>
+                                    <i class="fa fa-graduation-cap icons-fontawesome-menu"></i>
+                                </div>
+                                <div id="collapseOne" class="collapse" aria-labelledby="heading-perfil"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body padding-menu-vertical row">
+                                        <a class="col-12 btn text-secondary boton-menu"
+                                           type="button" href="{% url 'graduado_settings' %}">Datos Personales</a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header text-secondary collapsed" id="headingTwo" type="button"
+                                     data-toggle="collapse"
+                                     data-target="#collapseTwo" aria-expanded="false">
+                                    <span>Informacion</span>
+                                    <i class="fas fa-user-cog icons-fontawesome-menu"></i>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body padding-menu-vertical row">
+
+                                        <a class="col-12 btn text-secondary boton-menu"
+                                           type="button" href="#">Datos Personales</a>
+                                        <a class="col-12 btn text-secondary boton-menu"
+                                           type="button" href="#">Datos Personales</a>
+                                        <a class="col-12 btn text-secondary boton-menu"
+                                           type="button" href="#">Datos Personales</a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                                <!--./menu para egresados-->
+                            {% else %}#
+                                <a class="btn brn-sm btn-danger">No Egresado</a>
+                            {% endif %}
+
+                    </div>
+
+                </li>
+                <li>
+                    <div class="col-md-9 card">
+                        {% comment %}<div class="card-header">Datos de usuario
+
+                            {% if request.user.egresado %}
+                                <a class="btn brn-sm btn-success">Egresado</a>
+                            {% else %}#
+                                <a class="btn brn-sm btn-danger">No Egresado</a>
+                            {% endif %}
+
+                        </div>
+                        <div class="card-body">
+                            #Es estaff {{ request.user.is_staff }}#<br>
+                            #Estado: {{ request.user.username }}#<br>
+                            #Email: {{ request.user.email }}#<br>
+                            #Groups: {{ request.user.date_joined }}#<br>
+                            #Egresado: {{ request.user.id }}#<br>
+                            #Egresado Descripcion: {{ egresado.descripcion }}#<br>
+                            #Egresado Descripcion: {{ request.user.egresado.descripcion }}#<br>
+
+                        </div>{% endcomment %}
+                        {% block content %}{% endblock content %}
+                    </div>
+
+                </li>
+
+            </ul>
+        </div>
+
+
+
+<div style="clear: both"></div>
+
+<footer>
+
+    <div class="container" style="clear: bottom">
+        <br>
+        <div class="row">  {% if request.user|has_group:"egresado" %}
+                Es egresado
+            {% elif request.user|has_group:"administrador" %}
+                es administrador
+            {% else %}
+                no es ninguno
+            {% endif %}
+            <div class=" mx-auto btn-group btn-group-toggle" data-toggle="buttons">
+                <a class="btn btn-outline-secondary" href="{% url 'home' %}">Home</a>
+                <a class="btn btn-outline-secondary" href="{% url 'egresado' %}">Egresados</a>
+                <a class="btn btn-outline-secondary" href="{% url 'register' %}">Registrar</a>
+                <a class="btn btn-outline-secondary" href="{% url 'login' %}">Login</a>
+                <a class="btn btn-outline-secondary" href="{% url 'logout' %}">Salir</a>
+                <a class="btn btn-outline-secondary" href="{% url 'graduado_settings' %}">Graduado Setings</a>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+
+</body>
+<!--JAVASCRIPT FOR BOOTSTRAP-->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</html>
