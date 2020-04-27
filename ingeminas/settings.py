@@ -25,7 +25,8 @@ SECRET_KEY = 'n4-u0#^+s6uv-1!rp(w&@hlr8e@@&own4$9q(6@39c62e#8$#-'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-	'minastesting.herokuapp.com'
+	'minastesting.herokuapp.com',
+    'https://minastesting.herokuapp.com/'
 ]
 
 # Application definition
