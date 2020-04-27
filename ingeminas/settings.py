@@ -26,8 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'minastesting.herokuapp.com',
-    'https://minastesting.herokuapp.com/',
-    '127.0.0.1',
+#    'https://minastesting.herokuapp.com/',
+#    '127.0.0.1',
 ]
 
 # Application definition
@@ -133,5 +133,5 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 CORS_ORIGIN_ALLOW_ALL = True
