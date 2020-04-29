@@ -14,54 +14,6 @@
     }
 </style>
 
-{% comment %}<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="btn btn-light" href="{% url 'home' %}">Egresados</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav" style="background-color: red">
-            {% if request.user.is_staff %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Settings</a>
-                </li>
-            {% endif %}
-            <li class="nav-item">
-                <a class="nav-link"  href="#">Settings</a>
-            </li>
-        </ul>
-    </div>
-    <span class="hello-msg">Hola, {{ request.user.egresado.name }}</span>
-    <span><a class="hello-msg" href="{% url 'logout' %}">Salir</a></span>
-<div class="" style="background-color: yellow">Hola</div>
-
-    <div class="row" style="background-color: green">
-        <div class="user-area dropdown" style="float: right">
-            <a href="#" class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="profile-pic-nav" src="{{ request.user.egresado.foto.url }}" alt="User Avatar">
-            </a>
-
-                <div class="user-menu dropdown-menu float-left" style="float: left">
-                      <a class="nav-link float-left" href="#"><i class="fa fa- user"></i>My Profile</a>
-
-            <a class="nav-link"  href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
-                    <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
-                </div>
-
-        </div>
-</div>
-</nav>{% endcomment %}
 <!--TEST MENU-->
 <nav class="row navbar navbar-expand-lg navbar-dark bg-dark mx-auto">
     <div class="col-md-10" style="background-color: red;float: left">

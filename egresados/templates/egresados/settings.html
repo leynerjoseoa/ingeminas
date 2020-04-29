@@ -1,0 +1,40 @@
+{% extends 'egresados/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="card-header">
+        <span class="text-secondary">Informacion Personal</span>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <img class="profile-pic" src="{{ request.user.egresado.foto.url }}" alt="user pic">
+        </div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row mb-1">
+                <div class="col-md-3">{{ form.name.label }}</div>
+                <div class="col-md-9">{{ form.name }}</div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-3 ">{{ form.email.label }}</div>
+                <div class="col-md-9">{{ form.email }}</div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-3">{{ form.descripcion.label }}</div>
+                <div class="col-md-9">{{ form.descripcion }}</div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-3">{{ form.fechaNacimiento.label }}</div>
+                <div class="col-md-9">{{ form.fechaNacimiento }}</div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-3">{{ form.fechaGrado.label }}</div>
+                <div class="col-md-9">{{ form.fechaGrado }}</div>
+            </div>
+             <div class="row mb-1">
+                <div class="col-md-3">{{ form.foto.label }}</div>
+                 <div class="col-md-9">{{ form.foto }}</div></div>
+            <input class="btn btn-secondary" type="submit" name="Update Information" value="Guardar">
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% load static %}
+<style>
+    .profile-pic-nav {
+        max-width: 40px;
+        max-height: 40px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+</style>
+
+<!--TEST MENU-->
+<nav class="row navbar navbar-expand-lg navbar-dark bg-dark mx-auto">
+    <div class="col-md-9" style="float: left">
+        <div class="">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Dashboard</a>
+                        </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-3 ">
+
+            <div class="row">
+                <p class="text-right text-white col-md-10">{{ request.user.empresa.name }}</p>
+        <a href="#" class="mb-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float: right">
+            <img class="profile-pic-nav" src="{{ request.user.empresa.foto.url }}" alt="logo">
+        </a>
+        <div class="user-menu dropdown-menu" style="    margin-left: 50px; text-align: right">
+
+            <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-power -off"></i>Salir</a>
+        </div>
+            </div>
+    </div>
+</nav>

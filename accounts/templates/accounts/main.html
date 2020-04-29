@@ -1,5 +1,6 @@
 {% load static %}
 {% load has_group %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -401,6 +402,7 @@ a
 
 <footer>
 
+
     <div class="container" style="clear: bottom">
         <br>
         <div class="row">  {% if request.user|has_group:"egresado" %}
@@ -410,6 +412,7 @@ a
             {% else %}
                 no es ninguno
             {% endif %}
+
             <div class=" mx-auto btn-group btn-group-toggle" data-toggle="buttons">
                 <a class="btn btn-outline-secondary" href="{% url 'home' %}">Home</a>
                 <a class="btn btn-outline-secondary" href="{% url 'egresado' %}">Egresados</a>

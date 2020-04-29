@@ -1,0 +1,157 @@
+{% load static %}
+{% load has_group %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Empresas</title>
+    <link rel="shortcut icon" href="{% static '/images/favicon.png' %}"/>
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!--FONTAWESOME-->
+    <script src="https://kit.fontawesome.com/2a82ed09c6.js"></script>
+    <!--OWN STYLES-->
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+</head>
+<body>
+
+<style>
+
+    .menu li {
+        display: inline;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .menu li > div {
+        font-family: Arial;
+        float: left;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+
+</style>
+<style>
+    .icons-fontawesome-menu {
+        float: right;
+    }
+
+    .padding-menu-vertical {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .padding-menu-vertical > a {
+        padding-left: 0px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        opacity: 0.6;
+    }
+
+    .boton-menu:hover {
+    {% comment %}    background-color: whitesmoke !important;
+        margin-left: 30px !important;{% endcomment %} background-color: #ebeff5 !important;
+    }
+</style>
+<style>
+    .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+</style>
+<style>
+    .menu-border {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+</style>
+{% include 'empresas/navbar.html' %}
+
+<div>
+    <ul class="menu menu-border" style="background-color:cyan">
+        <li>
+
+            <div class=" col-md-2">
+                    <!--menu para egresados-->
+                    <div class="accordion" id="accordionExample">
+
+                        <div class="card" >
+                            <div class="card-header text-secondary collapsed" id="heading-perfil" type="button"
+                                 data-toggle="collapse"
+                                 data-target="#collapseOne" aria-expanded="false">
+                                <span>Perfil</span>
+                                <i class="fa fa-graduation-cap icons-fontawesome-menu"></i>
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="heading-perfil"
+                                 data-parent="#accordionExample">
+                                <div class="card-body padding-menu-vertical row">
+                                    <a class="col-12 btn text-secondary boton-menu"
+                                       type="button" href="{% url 'empresas:settings' %}">Informacion de la empresa</a>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                   {% comment %}     <div class="card">
+                            <div class="card-header text-secondary collapsed" id="headingTwo" type="button"
+                                 data-toggle="collapse"
+                                 data-target="#collapseTwo" aria-expanded="false">
+                                <span>Informacion</span>
+                                <i class="fas fa-user-cog icons-fontawesome-menu"></i>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordionExample">
+                                <div class="card-body padding-menu-vertical row">
+
+                                    <a class="col-12 btn text-secondary boton-menu"
+                                       type="button" href="#">Datos Personales</a>
+                                    <a class="col-12 btn text-secondary boton-menu"
+                                       type="button" href="#">Datos Personales</a>
+                                    <a class="col-12 btn text-secondary boton-menu"
+                                       type="button" href="#">Datos Personales</a>
+
+                                </div>
+                            </div>
+                        </div>{% endcomment %}
+
+
+                    </div>
+                    <!--./menu para egresados-->
+
+            </div>
+
+        </li>
+        <li>
+            <div class="col-md-10 card">
+
+                {% block content %}{% endblock content %}
+            </div>
+
+        </li>
+
+    </ul>
+</div>
+
+
+<div style="clear: both"></div>
+
+<footer class="fixed-bottom">
+     <hr width=90% style="height: 2px">
+<p class="text-center text-secondary">Copyrights &copy; Derechos reservados 2020</p>
+</footer>
+
+
+
+</body>
+<!--JAVASCRIPT FOR BOOTSTRAP-->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</html>

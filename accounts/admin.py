@@ -1,8 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from accounts.models import Egresado, Administrador
+from accounts.models import Administrador
 
-admin.site.register(Egresado)
 admin.site.register(Administrador)
 

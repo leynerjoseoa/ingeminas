@@ -16,7 +16,7 @@ from django.contrib.auth.models import User, Group
 #
 #
 # post_save.connect(administrador_profile, sender=User)
-from accounts.models import Egresado
+from egresados.models import Egresado
 
 
 def egresado_profile(sender, instance, created, **kwargs):

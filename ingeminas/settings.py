@@ -26,8 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'minastesting.herokuapp.com',
-#    'https://minastesting.herokuapp.com/',
-#    '127.0.0.1',
+    'localhost'
 ]
 
 # Application definition
@@ -40,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
+    'empresas',
+    'egresados',
+    'administrador',
 ]
 
 MIDDLEWARE = [
