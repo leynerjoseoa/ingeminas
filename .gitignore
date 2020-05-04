@@ -20,3 +20,8 @@ egresados/templatetags/__pycache__/
 administrador/__pycache__/
 administrador/migrations/
 administrador/templatetags/__pycache__/
+
+#empleo
+empleo/__pycache__/
+empleo/migrations/
+empleo/templatetags/__pycache__/

@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from egresados.forms import GraduadoForm
+from empleo.models import Empleo
 
 
 def home(request):
@@ -17,3 +18,8 @@ def settings(request):
             form.save()
     context = {'form': form}
     return render(request, 'egresados/settings.html', context)
+
+def empleos(request):
+    empleos = Empleo.objects.filter(egresado=request.user.egresado)
+    context = {'empleos':empleos}
+    return render(request, 'egresados/empleos.html', context)

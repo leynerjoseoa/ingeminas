@@ -1,0 +1,68 @@
+{% extends 'egresados/main.html' %}
+
+{% block content %}
+
+    {% comment %}<div class="card text-center">
+        <div class="card-header">
+            Empleos
+        </div>
+        <div class="card-body">
+            {% for empleo in empleos %}
+                <div class="card mb-1" style="width: 18rem;">
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{ empleo.cargo }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">{{ empleo.descripcion }}</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+    </div>{% endcomment %}
+    <div class="card text-center">
+        <div class="card-header">
+            Empleos
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Cargo</th>
+                    <th>Entidad</th>
+                    <th>Ingreso</th>
+                    <th>Salida</th>
+                    <th>Ver</th>
+                    <th>Cancelar</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for empleo in empleos %}
+                    <tr>
+                        <td> {{ empleo.cargo }}</td>
+                        <td> {{ empleo.entidad.nombre }}</td>
+                        <td> {{ empleo.fechaIngreso }}</td>
+                        <td> {{ empleo.fechaSalida }}</td>
+                        <td> <a class="btn btn-sm btn-primary">ver</a></td>
+                    <td> <a class="btn btn-sm btn-danger">cancelar</a></td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+    </div>
+
+
+
+{% endblock content %}
