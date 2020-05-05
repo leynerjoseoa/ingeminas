@@ -5,7 +5,8 @@ from egresados.models import Egresado
 
 
 class Entidad(models.Model):
-    nombre = models.CharField(max_length=200, blank=True, null=True)
+    nombre = models.CharField(max_length=200,blank=False,null=False)
+    nit = models.CharField(max_length=50, primary_key=True,blank=True)
     descripicion = models.CharField(max_length=200, blank=True, null=True)
     estado = models.BooleanField(default=True)
 
@@ -23,3 +24,6 @@ class Empleo(models.Model):
 
     def __str__(self):
         return '{0} en {1} :{2}'.format(self.cargo, self.entidad, self.egresado)
+
+
+

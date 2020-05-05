@@ -1,0 +1,41 @@
+{% extends 'egresados/main.html' %}
+{% block content %}
+    <div class="card text-center">
+        <div class="card-header">
+            Empleo
+        </div>
+
+        <div class="card-body">
+
+
+
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row mb-1">
+                    <div class="col-md-3">{{ form.cargo.label }}</div>
+                    <div class="col-md-9">{{ form.cargo }}</div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-md-3">{{ form.fechaIngreso.label }}</div>
+                    <div class="col-md-9">{{ form.fechaIngreso }}</div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-md-3">{{ form.fechaSalida.label }}</div>
+                    <div class="col-md-9">{{ form.fechaSalida }}</div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-md-3">{{ form.entidad.label }}</div>
+                    <div class="col-md-9">{{ form.entidad }}</div>
+                </div>
+                <input type="submit" name="Submit" value="Guardar">
+            </form>
+
+
+        </div>
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+    </div>
+
+{% endblock content %}

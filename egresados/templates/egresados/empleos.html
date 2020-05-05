@@ -30,9 +30,32 @@
             Empleos
         </div>
         <div class="card-body">
-            <table class="table">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text"><a class="btn btn-sm btn-info" href="{% url 'egresados:crear_empleo' request.user.egresado.id %}">Agregar Empleo</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+            <hr>
+            <table class="table table-hover">
                 <thead>
-                <tr>
+                <tr class="table-info">
                     <th>Cargo</th>
                     <th>Entidad</th>
                     <th>Ingreso</th>
@@ -49,8 +72,8 @@
                         <td> {{ empleo.entidad.nombre }}</td>
                         <td> {{ empleo.fechaIngreso }}</td>
                         <td> {{ empleo.fechaSalida }}</td>
-                        <td> <a class="btn btn-sm btn-primary">ver</a></td>
-                    <td> <a class="btn btn-sm btn-danger">cancelar</a></td>
+                        <td><a href="{% url 'egresados:empleo' empleo.id %}" class="btn btn-sm btn-primary">ver</a></td>
+                        <td><a class="btn btn-sm btn-danger">cancelar</a></td>
 
                     </tr>
                 {% endfor %}

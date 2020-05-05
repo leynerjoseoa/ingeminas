@@ -1,0 +1,45 @@
+{% extends 'egresados/main.html' %}
+{% block content %}
+    <div class="card text-center">
+        <div class="card-header">
+            Crear Empresa
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row mb-1">
+                    <div class="col-md-3">{{ form.nombre.label }}</div>
+                    <div class="col-md-9">{{ form.nombre }}</div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-md-3">{{ form.nit.label }}</div>
+                    <div class="col-md-9">{{ form.nit }}</div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-md-3">{{ form.descripicion.label }}</div>
+                    <div class="col-md-9">{{ form.descripicion }}</div>
+                </div>
+
+                <input class="btn btn-sm btn-primary" type="submit" name="Submit" value="Guardar">
+            </form>
+        <hr>
+            {% if messages %}
+
+                {% for message in messages %}
+                    <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+
+    <select id="cars">
+
+                {% for item in empresas %}
+                    <option value="{{ item.id }}">{{ item.nombre }}</option>{% endfor %}
+            </select>
+
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+    </div>
+{% endblock content %}
