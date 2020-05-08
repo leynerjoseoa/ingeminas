@@ -1,0 +1,16 @@
+.profile-pic-nav {
+    max-width: 40px;
+    max-height: 40px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.profile-pic{
+    max-height: 150px;
+    max-width: 150px;
+    border-radius: 50%;
+}
+
+.minas-right{
+    float: right;
+}

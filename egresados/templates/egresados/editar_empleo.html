@@ -1,0 +1,65 @@
+{% extends 'egresados/main.html' %}
+{% load static %}
+
+{% block content %}
+    <br>
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+
+
+                    <div class="card-body">
+                        {% csrf_token %}
+                        <div class="row mb-1">
+                            <div class="col-md-3">{{ form.cargo.label }}</div>
+                            <div class="col-md-9">{{ form.cargo }}</div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-md-3">{{ form.fechaIngreso.label }}</div>
+                            <div class="col-md-9 row mx-auto">{{ form.fechaIngreso }}</div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-md-3">{{ form.fechaSalida.label }}</div>
+                            <div class="col-md-9 row mx-auto">{{ form.fechaSalida }}</div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-md-3">{{ form.entidad.label }}</div>
+                            <div class="col-md-9">{{ form.entidad }}</div>
+                        </div>
+
+                        <div class="row mb-1">
+                            <input type="hidden" name="egresado" required id="id_egresado"
+                                   value="{{ request.user.egresado.pk }}">
+                        </div>
+
+
+                    </div>
+
+                    <div class="text-muted">
+                        <input class="btn btn-sm btn-success text-white" type="submit"
+                               style="float: right" value="guardar">
+
+                        <a class="btn btn-sm btn-primary"
+                           href="{% url 'egresados:crear_empresa' %}" style="float: right;margin-right: 2px">agregar
+                            empresa</a>
+                        <a href="{% url 'egresados:eliminar_empleo'  empleo.id %}" class="btn btn-sm btn-danger"
+                           style="float: right;margin-right: 2px">eliminar</a>
+
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+    <form method="POST" id="form-eliminar">
+
+        {% csrf_token %}
+
+    </form>
+
+{% endblock content %}

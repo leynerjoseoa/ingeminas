@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from empresas.forms import EmpresaForm
-from empresas.models import Empresa
+from empresas.models import EmpresaUsuario
 
 
 def home(request):

@@ -6,7 +6,7 @@ from egresados.models import Egresado
 
 class Entidad(models.Model):
     nombre = models.CharField(max_length=200,blank=False,null=False)
-    nit = models.CharField(max_length=50, primary_key=True,blank=True)
+    nit = models.CharField(max_length=50, primary_key=True,blank=False, null=False)
     descripicion = models.CharField(max_length=200, blank=True, null=True)
     estado = models.BooleanField(default=True)
 

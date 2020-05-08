@@ -3,7 +3,7 @@ from django.db import models
 
 
 # Create your models here.
-class Empresa(models.Model):
+class EmpresaUsuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, blank=True, null=True)
     foto = models.ImageField(default='education.png', upload_to='', blank=True, null=True)

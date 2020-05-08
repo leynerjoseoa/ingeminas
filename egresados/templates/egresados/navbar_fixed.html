@@ -1,0 +1,39 @@
+{% load static %}
+
+<style>
+    .profile-pic-nav {
+        max-width: 40px;
+        max-height: 40px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+</style>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom  border-danger">
+  <a class="navbar-brand text-danger" href="{% url 'egresados:home' %}">Minas</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      {{ request.user.egresado }}
+    </span>
+
+        <a href="#" class="mb-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float: right">
+            <img class="profile-pic-nav" src="{{ request.user.egresado.foto.url }}" alt="logo">
+        </a>
+
+  </div>
+</nav>
+

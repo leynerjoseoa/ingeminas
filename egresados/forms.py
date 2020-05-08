@@ -33,29 +33,28 @@ class GraduadoForm(ModelForm):
             ),
             'foto': forms.FileInput(
                 attrs={
-                    'class': 'form-control-file',
-                    'placeholder': 'Ingresa tu correo electronico'
+                    'class': 'text-secondary',
                 }
             ),
             'descripcion': forms.Textarea(
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Ingresa una breve descripcion de ti',
-                    'cols': 40, 'rows': 1,
+                    'cols': 40, 'rows': 2,
                 }
             ),
-
-            'fechaGrado': forms.DateInput(
-                format=('%d/%m/%Y'),
+            'fechaGrado': forms.SelectDateWidget(
+                years=range(1900, 2001),
                 attrs={
-                    'class': 'form-control'
-                }),
-            'fechaNacimiento': forms.DateInput(
-                format=('%d/%m/%Y'),
+                    'class': 'form-control col-md-4',
+                }
+            ),
+            'fechaNacimiento': forms.SelectDateWidget(
+                years=range(1900, 2001),
                 attrs={
-                    'class': 'form-control'
-                }),
-
+                    'class': 'form-control col-md-4',
+                }
+            ),
         }
 
         exclude = ['user']

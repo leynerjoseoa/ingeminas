@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+'bootstrap_modal_forms',
     # 'accounts.apps.AccountsConfig',
     'accounts',
     'empresas',
@@ -139,3 +140,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ORIGIN_ALLOW_ALL = True
+#X_FRAME_OPTIONS = 'SAMEORIGIN'

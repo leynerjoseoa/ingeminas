@@ -1,12 +1,12 @@
 from django.forms import ModelForm
 from django import forms
 
-from empresas.models import Empresa
+from empresas.models import EmpresaUsuario
 
 
 class EmpresaForm(ModelForm):
     class Meta:
-        model = Empresa
+        model = EmpresaUsuario
         # fields = '__all__'
         fields = ['name', 'email', 'foto', 'descripcion']
         labels = {

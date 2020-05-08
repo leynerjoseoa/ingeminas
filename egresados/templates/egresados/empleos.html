@@ -1,67 +1,258 @@
 {% extends 'egresados/main.html' %}
+{% load static %}
+{% block extracss %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+{% endblock extracss %}
 
 {% block content %}
+ {% comment %}   <br>
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-body">
+                <a type="button" class="btn btn-sm text-white" style="background-color: #88d8b0">
+                    <span class="fa fa-plus"></span>
+                </a>
+
+            </div>
+        </div>
+
+    </div>{% endcomment %}
+    <br>
+    <!--table-->
+    <div class="container-fluid">
+        <table class="table border table-hover" id="table_empleos">
+            <thead>
+            <tr class="table-info text-uppercase">
+                <th>Cargo</th>
+                <th>Entidad</th>
+                <th>Ingreso</th>
+                <th>Salida</th>
+                <th>opciones</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for empleo in empleos %}
+                <tr id="tr_{{ empleo.id }}">
+                    <td> {{ empleo.cargo }}</td>
+                    <td> {{ empleo.entidad.nombre }}</td>
+                    <td> {{ empleo.fechaIngreso }}</td>
+                    <td> {{ empleo.fechaSalida }}</td>
+
+                    <td>
+                        <a href="{% url 'egresados:editar_empleo' empleo.id %}"
+                           class="btn btn-sm btn-primary"><span class="fa fa-eye"></span></a>
+                        <a type="button" class="delete-book btn btn-sm btn-danger"
+                           href="{% url 'egresados:eliminar_empleo'  empleo.id %}">
+                            <span class="fa fa-trash"></span>
+                        </a>
+
+                        <a type="button" class="delete-book btn btn-sm btn-danger"
+                           id="btn_{{ empleo.id }}"
+                           onclick="eliminarya('{% url 'egresados:eliminar_empleo' empleo.id %}',{{ empleo.id }})">
+
+                            <span class="fa fa-trash"></span>
+                        </a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+    <!--table-->
+
 
     {% comment %}<div class="card text-center">
         <div class="card-header">
             Empleos
+            <a type="button" class="btn btn-sm btn-success minas-right"
+               href="{% url 'egresados:crear_empleo' request.user.egresado.id %}">
+                <span class="fa fa-plus"></span>
+            </a>
         </div>
         <div class="card-body">
-            {% for empleo in empleos %}
-                <div class="card mb-1" style="width: 18rem;">
-                    <div class="card-body">
 
-                        <h5 class="card-title">{{ empleo.cargo }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">{{ empleo.descripcion }}</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
 
-                    </div>
-                </div>
-            {% endfor %}
+            <table class="table border table-hover" id="table_empleos">
+                <thead>
+                <tr class="table-info text-uppercase">
+                    <th>Cargo</th>
+                    <th>Entidad</th>
+                    <th>Ingreso</th>
+                    <th>Salida</th>
+                    <th>opciones</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for empleo in empleos %}
+                    <tr id="tr_{{ empleo.id }}">
+                        <td> {{ empleo.cargo }}</td>
+                        <td> {{ empleo.entidad.nombre }}</td>
+                        <td> {{ empleo.fechaIngreso }}</td>
+                        <td> {{ empleo.fechaSalida }}</td>
+
+                        <td>
+                            <a href="{% url 'egresados:editar_empleo' empleo.id %}"
+                               class="btn btn-sm btn-primary"><span class="fa fa-eye"></span></a>
+                            <a type="button" class="delete-book btn btn-sm btn-danger"
+                               href="{% url 'egresados:eliminar_empleo'  empleo.id %}">
+                                <span class="fa fa-trash"></span>
+                            </a>
+
+                            <a type="button" class="delete-book btn btn-sm btn-danger"
+                               id="btn_{{ empleo.id }}"
+                               onclick="eliminarya('{% url 'egresados:eliminar_empleo' empleo.id %}',{{ empleo.id }})">
+
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
         </div>
         <div class="card-footer text-muted">
             2 days ago
         </div>
     </div>{% endcomment %}
+
+    <form method="POST" id="form-eliminar">
+
+        {% csrf_token %}
+
+    </form>
+
+{% endblock content %}
+
+{% block extrajs %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/empleo/empleos.js' %}"></script>
+{% endblock extrajs %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %}
+
+{% block content %}
+
+    <!-- Widgets  -->
+    <div class="row mb-1">
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <a class="btn" type="buttom" id="btnfortest"
+                               href="{% url 'egresados:crear_empleo' request.user.egresado.id %}">
+                                <i class="far fa-plus-square fa-2x" type="buttom" style="color: #00c292"></i>
+                            </a>
+                        </div>
+
+                        <div class="col-md-7">
+                            <div class="text-left dib">
+                                <div class="stat-text text-info"><span class="count">{{ empleos.count }}</span></div>
+                                <div class="stat-heading text-secondary">Empleos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-2">
+                            <i class="pe-7s-cart"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">3435</span></div>
+                                <div class="stat-heading">Sales</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-3">
+                            <i class="pe-7s-browser"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">349</span></div>
+                                <div class="stat-heading">Templates</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="pe-7s-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">2986</span></div>
+                                <div class="stat-heading">Clients</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Widgets -->
     <div class="card text-center">
         <div class="card-header">
             Empleos
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text"><a class="btn btn-sm btn-info" href="{% url 'egresados:crear_empleo' request.user.egresado.id %}">Agregar Empleo</a>
-                                    </div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-            </div>
-            <hr>
-            <table class="table table-hover">
+            <table class="table-sm table table-hover" id="table_empleos">
                 <thead>
-                <tr class="table-info">
+                <tr class="table-info text-uppercase">
                     <th>Cargo</th>
                     <th>Entidad</th>
                     <th>Ingreso</th>
                     <th>Salida</th>
-                    <th>Ver</th>
-                    <th>Cancelar</th>
+                    <th>opciones</th>
+
 
                 </tr>
                 </thead>
@@ -72,8 +263,25 @@
                         <td> {{ empleo.entidad.nombre }}</td>
                         <td> {{ empleo.fechaIngreso }}</td>
                         <td> {{ empleo.fechaSalida }}</td>
-                        <td><a href="{% url 'egresados:empleo' empleo.id %}" class="btn btn-sm btn-primary">ver</a></td>
-                        <td><a class="btn btn-sm btn-danger">cancelar</a></td>
+
+                        <td>
+                            <a href="{% url 'egresados:editar_empleo' empleo.id %}"
+                               class="btn btn-sm btn-primary"><span class="fa fa-eye"></span></a>
+                            <a type="button" class="delete-book btn btn-sm btn-danger"
+                               href="{% url 'egresados:eliminar_empleo'  empleo.id %}">
+                                <span class="fa fa-trash"></span>
+                            </a>
+                            <button id="btn_{{ empleo.id }}"
+                                    onclick="eliminarya('{% url 'egresados:editar_empleo' empleo.id %}',{{ empleo.id }})">
+                                btn
+                            </button>
+                            <a type="button" class="delete-book btn btn-sm btn-success"
+                               id="btn_{{ empleo.id }}"
+                               onclick="eliminarya('{% url 'egresados:eliminar_empleo' empleo.id %}',{{ empleo.id }})">
+
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </td>
 
                     </tr>
                 {% endfor %}
@@ -85,7 +293,64 @@
             2 days ago
         </div>
     </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+    <script type="text/javascript">
+        var $ = jQuery.noConflict();
+
+        function eliminarya(url, id) {
+
+            /*$('#estesera').load(url, function () {
+
+             })*/
+
+            $('#btn_' + id).load(
+                jQuery.confirm({
+                    title: 'Estas seguro de Eliminar?',
+                    content: 'url:' + url,
+                    type: 'red',
+                    icon: 'fa fa-trash',
+                    onContentReady: function () {
+                        // when content is fetched & rendered in DOM
+                        var self = this;
+
+                    },
+                    buttons: {
+                        ok: function guardar() {
+                            console.log('entro al btn ok!');
+                            //user = JSON.parse(sessionStorage.getItem("usuario"));{% csrf_token %}
+                            $.ajax({
+                                url: url,
+                                type: "POST",
+                                data: url,
+                                success: function (status, result) {
+                                    if (status = 'true') {
+                                        console.log('completado.')
+                                    } else {
+                                        console.log('no completado.')
+                                    }
+                                },
+                                fail: function () {
+                                    alert("error");
+                                }
+                            });
+                        },
+                        close: function () {
+                        console.log('click! => no done')
+                    }
+
+                    },
+                }
 
 
+        )
+        )
 
+
+        }
+    </script>
 {% endblock content %}
+{% endcomment %}

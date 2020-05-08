@@ -1,0 +1,36 @@
+{#<a href="{% url 'egresados:empleos' %}" class="list-group-item list-group-item-action bg-light">Empleos</a>#}
+
+<div id="menu_padre">
+
+
+    <a href="" class="list-group-item list-group-item-action bg-light" id="menu_v1" type="button"
+       data-toggle="collapse"
+       data-target="#collapse15" aria-expanded="false">Empleos</a>
+
+    <div id="collapse15" class="collapse" aria-labelledby="menu_v1"
+         data-parent="#menu_padre">
+        <a href="{% url 'egresados:empleos' %}"
+           class="list-group-item list-group-item-action bg-light">Listar</a>
+        <a href="{% url 'egresados:crear_empleo'%}"
+           class="list-group-item list-group-item-action bg-light">Agregar</a>
+        <a href="{% url 'egresados:crear_empresa'%}"
+           class="list-group-item list-group-item-action bg-light">Registrar Empresa</a>
+    </div>
+    {% comment %}   <a href="" class="list-group-item list-group-item-action bg-light" id="heading-perfil" type="button"
+       data-toggle="collapse"
+       data-target="#collapse16" aria-expanded="false" aria-labelledby="jajaja">Prueba</a>
+
+    <div id="collapse16" class="collapse" aria-labelledby="jajaja"
+         data-parent="#menu_padre">
+        <div class="card-body padding-menu-vertical row">
+            <a class="col-12 btn text-secondary boton-menu"
+               type="button" href="{% url 'egresados:settings' %}">Datos Personales</a>
+            <a class="col-12 btn text-secondary boton-menu"
+               type="button" href="{% url 'egresados:settings' %}">Datos Personales</a>
+        </div>
+    </div>{% endcomment %}
+
+
+</div>
+
+<a href="{% url 'egresados:settings' %}" class="list-group-item list-group-item-action bg-light">Configuracion</a>
