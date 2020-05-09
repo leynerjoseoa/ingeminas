@@ -1,4 +1,3 @@
-from bootstrap_modal_forms.generic import BSModalDeleteView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
