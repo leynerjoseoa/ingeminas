@@ -1,31 +1,7 @@
-from bootstrap_modal_forms.forms import BSModalForm
 from django import forms
 from django.forms import ModelForm, models
 
 from empleo.models import Empleo, Entidad
-
-
-class EmpleoFormTwo(BSModalForm):
-    class Meta:
-        model = Empleo
-        fields = '__all__'
-        widgets = {
-            'cargo': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingresa tu nombre'
-                }
-            ),
-            'fechaIngreso': forms.SelectDateWidget(years=range(1900, 2001)),
-            'fechaSalida': forms.SelectDateWidget(years=range(1900, 2001)),
-            'pk': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingresa tu nombre'
-                }
-            )
-        }
-
 
 class EmpleoForm(models.ModelForm):
     class Meta:

@@ -79,12 +79,7 @@ def eliminarEmpleo(request, pk_empleo):
     return render(request, template_name, context)
 
 
-# Delete
-class EmpleoDeleteView(BSModalDeleteView):
-    model = Empleo
-    template_name = 'egresados/eliminar_empleo_modal.html'
-    success_message = 'Success: Empleo was deleted.'
-    success_url = reverse_lazy('egresados:empleos')
+
 
     ##########################  FIN DELETE ############################
 
