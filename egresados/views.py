@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 # Create your views here.
@@ -77,9 +77,6 @@ def eliminarEmpleo(request, pk_empleo):
     if request.method == 'GET':
         context = {'item': empleo1}
     return render(request, template_name, context)
-
-
-
 
     ##########################  FIN DELETE ############################
 
@@ -181,6 +178,7 @@ def crear_empresa(request):
     context = {'form': form, 'empresas': Entidad.objects.all()}
     return render(request, 'egresados/crear_empresa.html', context)
 
+
 # backup
 # def crearEmpleo(request, pk):
 #     print('[',request.POST.get('cargo'),']')
@@ -225,3 +223,7 @@ def crear_empresa(request):
 #     print('va bien')
 #     context = {'form':form}
 #     return render(request, 'egresados/crear_empleo.html', context)
+
+def egresados(request):
+    graduates = Egresado.objects.filter(estado=request.GET.get('estado'))
+    return JsonResponse(list(graduates.values()), safe=False)

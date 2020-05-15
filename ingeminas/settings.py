@@ -38,13 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#'bootstrap_modal_forms',
     # 'accounts.apps.AccountsConfig',
     'accounts',
     'empresas',
     'egresados',
     'administrador',
     'empleo',
+    'convocatorias',
+
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -85,14 +87,20 @@ WSGI_APPLICATION = 'ingeminas.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd1vkpuip5i8h09',
+#         'HOST': 'ec2-52-23-14-156.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#         'PASSWORD': '43d768bd499effb77c991496467864d6e626204b34bef7aff0bbe76d78532669',
+#         'USER': 'fplrzjyqfjyrnf',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1vkpuip5i8h09',
-        'HOST': 'ec2-52-23-14-156.compute-1.amazonaws.com',
-        'PORT': '5432',
-        'PASSWORD': '43d768bd499effb77c991496467864d6e626204b34bef7aff0bbe76d78532669',
-        'USER': 'fplrzjyqfjyrnf',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -138,5 +146,13 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+    'awesome_ckeditor': {
+        'toolbar': 'Basic',
+    },
+}
 CORS_ORIGIN_ALLOW_ALL = True
+

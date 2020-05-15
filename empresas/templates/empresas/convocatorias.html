@@ -1,0 +1,38 @@
+{% extends 'empresas/main.html' %}
+{% load static %}
+
+{% block content %}
+        <br>
+    <div class="container-fluid">
+        <table class="table border table-hover" id="table_empleos">
+            <thead>
+            <tr class="table-info text-uppercase">
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>Opciones</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for element in convocatorias %}
+                <tr id="tr_{{ element.id }}">
+                    <td> {{ element.titulo }}</td>
+                    <td> {{ element.descripcion }}</td>
+                    <td>
+                        <a href="{% url 'convocatorias:editar' element.id %}"
+                           class="btn btn-sm btn-primary"><span class="fa fa-eye"></span></a>
+                        <a href="{% url 'convocatorias:eliminar' element.id %}"
+                           class="btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
+
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% endblock content %}

@@ -25,3 +25,8 @@ administrador/templatetags/__pycache__/
 empleo/__pycache__/
 empleo/migrations/
 empleo/templatetags/__pycache__/
+
+#convocatorias
+convocatorias/__pycache__/
+convocatorias/migrations/
+convocatorias/templatetags/__pycache__/

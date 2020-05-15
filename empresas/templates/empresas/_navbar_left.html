@@ -5,16 +5,17 @@
 
     <a href="" class="list-group-item list-group-item-action bg-light" id="menu_v1" type="button"
        data-toggle="collapse"
-       data-target="#collapse15" aria-expanded="false">Empleos</a>
+       data-target="#collapse15" aria-expanded="false">Convocatorias</a>
 
     <div id="collapse15" class="collapse" aria-labelledby="menu_v1"
          data-parent="#menu_padre">
-        <a href="{% url 'egresados:empleos' %}"
+        <a href="{% url 'convocatorias:convocatorias_empresas' request.user.empresausuario.id %}"
            class="list-group-item list-group-item-action bg-light">Listar</a>
-        <a href="{% url 'egresados:crear_empleo'%}"
-           class="list-group-item list-group-item-action bg-light">Agregar</a>
-        <a href="{% url 'egresados:crear_empresa'%}"
-           class="list-group-item list-group-item-action bg-light">Registrar Empresa</a>
+
+{% comment %}        <a href="{% url 'egresados:crear_empleo'%}"
+           class="list-group-item list-group-item-action bg-light">Agregar</a>{% endcomment %}
+        <a href="{% url 'convocatorias:crear'%}"
+           class="list-group-item list-group-item-action bg-light">Nueva</a>
     </div>
     {% comment %}   <a href="" class="list-group-item list-group-item-action bg-light" id="heading-perfil" type="button"
        data-toggle="collapse"
@@ -32,6 +33,5 @@
 
 
 </div>
-<a href="{% url 'convocatorias:convocatorias_egresado' request.user.egresado.id %}" class="list-group-item list-group-item-action bg-light">Convocatorias</a>
 
-<a href="{% url 'egresados:settings' %}" class="list-group-item list-group-item-action bg-light">Configuracion</a>
+<a href="{% url 'empresas:settings' %}" class="list-group-item list-group-item-action bg-light">Configuracion</a>

@@ -15,6 +15,11 @@ class Egresado(models.Model):
     descripcion = models.CharField(max_length=200, blank=True, null=True)
     fechaNacimiento = models.DateField(editable=True, blank=True, null=True)
     fechaGrado = models.DateField(editable=True, blank=True, null=True)
+    ESTADO = (
+        ('empleado', 'empleado'),
+        ('desempleado', 'desempleado'),
+    )
+    estado = models.CharField(max_length=200, null=False, choices=ESTADO, blank=False)
 
     def __str__(self):
         return self.name

@@ -1,5 +1,6 @@
 from django.urls import path, include
-from egresados.views import home, settings, empleos, empleo, crearEmpleo, crear_empresa, editarEmpleo, eliminarEmpleo
+from egresados.views import home, settings, empleos, empleo, crearEmpleo, crear_empresa, editarEmpleo, eliminarEmpleo, \
+    egresados
 
 urlpatterns = [
 
@@ -15,6 +16,8 @@ urlpatterns = [
     path('settings/', settings, name='settings'),
     path('empleos/', empleos, name='empleos'),
     path('', home, name="home"),
+
+    path('egresados/', egresados, name="egresados"),
 ]
 # path('settings/', settings, name='settings'),
 #     path('empleos/', empleos, name='empleos'),

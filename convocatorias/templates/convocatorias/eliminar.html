@@ -1,0 +1,26 @@
+{% extends 'empresas/main.html' %}
+{% load static %}
+{% block content %}
+
+
+    <br>
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-body">
+                <p>Estas seguro de querer eliminar "{{ convocatoria }}"?</p>
+
+                <form action="{% url 'convocatorias:eliminar' convocatoria.id %}" method="POST">
+
+                    {% csrf_token %}
+                    <a class="btn btn-sm btn-warning" href="{% url 'convocatorias:convocatorias_empresas'  empresa_id  %}">cancelar</a>
+
+                    <input class="btn btn-sm btn-danger" type="submit" name="Confirm" value="eliminar">
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

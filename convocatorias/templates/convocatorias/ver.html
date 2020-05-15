@@ -1,0 +1,13 @@
+{% extends 'egresados/main.html' %}
+{% load static %}
+{% block content %}
+    <br>
+    <div class="container-fluid">
+        <div class="row mx-auto">
+            <img class="rounded-sm mx-auto" src="{{ convocatoria.imagen }}" alt="img convocatoria">
+        </div>
+    <h2 class="mb-4">{{ convocatoria.titulo }}</h2>
+    <p>{{ convocatoria.contenido | safe}}</p>
+    </div>
+
+{% endblock content %}
