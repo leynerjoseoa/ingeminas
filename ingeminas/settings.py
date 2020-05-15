@@ -87,22 +87,22 @@ WSGI_APPLICATION = 'ingeminas.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'd1vkpuip5i8h09',
-#         'HOST': 'ec2-52-23-14-156.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#         'PASSWORD': '43d768bd499effb77c991496467864d6e626204b34bef7aff0bbe76d78532669',
-#         'USER': 'fplrzjyqfjyrnf',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd1vkpuip5i8h09',
+        'HOST': 'ec2-52-23-14-156.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'PASSWORD': '43d768bd499effb77c991496467864d6e626204b34bef7aff0bbe76d78532669',
+        'USER': 'fplrzjyqfjyrnf',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
