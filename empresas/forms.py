@@ -14,37 +14,27 @@ class EmpresaForm(ModelForm):
         labels = {
             'name': 'Nombre de la empresa',
             'email': 'Email de la empresa',
-            'foto': 'Foto de la eempresa',
-            'descripcion': 'Descripcion de la epresa',
+            'foto': 'Foto de la empresa',
+            'descripcion': 'Descripcion de la empresa',
         }
         widgets = {
             'name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Ingresa tu nombre'
+                    'placeholder': 'Ingresa el nombre de la empresa'
                 }
             ),
             'email': forms.EmailInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Ingresa tu correo electronico'
+                    'placeholder': 'Ingresa el correo electronico de la empresa'
                 }
             ),
             'foto': forms.FileInput(
                 attrs={
                     'class': 'form-control-file',
-                    'placeholder': 'Ingresa tu correo electronico'
                 }
-            ),
-            # 'descripcion': forms.Textarea(
-            #     attrs={
-            #         'class': 'form-control col-md-12',
-            #         'placeholder': 'Ingresa una breve descripcion de ti',
-            #         'cols': 40, 'rows': 1,
-            #     }
-            # ),
-
-
+            )
         }
 
         exclude = ['user']
