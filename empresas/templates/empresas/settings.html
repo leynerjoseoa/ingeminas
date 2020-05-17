@@ -1,10 +1,8 @@
 {% extends 'empresas/main.html' %}
 {% load static %}
 {% block content %}
-    <div class="card-header">
-        <span class="text-secondary">Informacion Personal</span>
-    </div>
-    <div class="card-body">
+    <div class="container-fluid">
+     <div class="card-body">
 
         <img class="profile-pic row mx-auto mb-1" src="{{ request.user.empresausuario.foto.url }}" alt="user pic">
         <form method="POST" action="" enctype="multipart/form-data">
@@ -18,14 +16,25 @@
                 <div class="col-md-3 ">{{ form.email.label }}</div>
                 <div class="col-md-9">{{ form.email }}</div>
             </div>
-            <div class="row mb-1">
-                <div class="col-md-3">{{ form.descripcion.label }}</div>
-                <div class="col-md-9">{{ form.descripcion }}</div>
+
+            <h4 class="mb-5 text-center">{{ form.descripcion.label }}</h4>
+            <div class="container-fluid">
+                <div class="text-center">{{ form.descripcion }}</div>
             </div>
              <div class="row mb-1">
                 <div class="col-md-3">{{ form.foto.label }}</div>
                  <div class="col-md-9">{{ form.foto }}</div></div>
-            <input class="btn btn-secondary" type="submit" name="Update Information" value="Guardar">
+            <input style="float: right;" class="btn btn-sm text-white btn-success" type="submit"
+                           name="Update Information" value="guardar">
         </form>
     </div>
+    </div>
+
+
 {% endblock content %}
+
+
+{% block extrajs %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock extrajs %}

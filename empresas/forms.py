@@ -1,3 +1,4 @@
+from ckeditor.widgets import CKEditorWidget
 from django.forms import ModelForm
 from django import forms
 
@@ -5,15 +6,16 @@ from empresas.models import EmpresaUsuario
 
 
 class EmpresaForm(ModelForm):
+    descripcion = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = EmpresaUsuario
         # fields = '__all__'
         fields = ['name', 'email', 'foto', 'descripcion']
         labels = {
-            'name': 'Nombre del egresado',
-            'email': 'Email del egresado',
-            'foto': 'Foto del egresado',
-            'descripcion': 'Descripcion del egresado',
+            'name': 'Nombre de la empresa',
+            'email': 'Email de la empresa',
+            'foto': 'Foto de la eempresa',
+            'descripcion': 'Descripcion de la epresa',
         }
         widgets = {
             'name': forms.TextInput(
@@ -34,13 +36,13 @@ class EmpresaForm(ModelForm):
                     'placeholder': 'Ingresa tu correo electronico'
                 }
             ),
-            'descripcion': forms.Textarea(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingresa una breve descripcion de ti',
-                    'cols': 40, 'rows': 1,
-                }
-            ),
+            # 'descripcion': forms.Textarea(
+            #     attrs={
+            #         'class': 'form-control col-md-12',
+            #         'placeholder': 'Ingresa una breve descripcion de ti',
+            #         'cols': 40, 'rows': 1,
+            #     }
+            # ),
 
 
         }

@@ -1,11 +1,38 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.models import User
+from django.db import IntegrityError
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
 # Create your views here.
 from accounts.decorators import unauthenticated_user
 from accounts.forms import CreateUserForm
+from egresados.models import Egresado
+
+
+def crear_egresado(request):
+    #me = User.objects.create(username='monica',email='monica@gmail.com',password='0Clave0001',is_active=True)
+    try:
+        me = User(username='albertao', email='alberto@gmail.com', is_active=True)
+        me.set_password('0Clave0001')
+
+        me.save()
+        egresado = Egresado.objects.create(
+            # user=models.OneToOneField(User, on_delete=models.CASCADE)
+            user=me,
+            name='alberto',
+            email='alberto@gmail.com',
+            descripcion='estu',
+
+            estado='desempleado'
+        )
+        return HttpResponse('ready!')
+    except IntegrityError:
+        return HttpResponse('Integrity Error!')
+
+    return HttpResponse('Failed!')
 
 
 def registerPage(request):
@@ -44,19 +71,18 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             try:
-                if user.empresa:
-                    return redirect('empresas:home')
+                if user.empresausuario:
+                    return redirect('empresas:presentacion', pk_empresa=request.user.empresausuario.id)
             except:
                 pass
             try:
                 if user.egresado:
-                    print('e')
                     return redirect('egresados:home')
             except:
                 pass
             try:
                 if user.administrador:
-                    return redirect('administrador_home')
+                    return redirect('administrador:home')
             except:
                 pass
 
@@ -66,6 +92,7 @@ def loginPage(request):
     context = {}
     return render(request, 'accounts/login.html', context)
 
+
 def logoutUser(request):
     logout(request)
     return redirect('login')
@@ -74,7 +101,6 @@ def logoutUser(request):
 def egresado(request):
     context = {}
     return render(request, 'accounts/egresado.html', context)
-
 
 # def graduadoSettings(request):
 #     egresado = request.user.egresado

@@ -1,10 +1,96 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Minas</title>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!--FONTAWESOME-->
+    <script src="https://kit.fontawesome.com/2a82ed09c6.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+    <link href="{% static 'css/minas.css' %}" rel="stylesheet">
+
+    {% block extracss %}
+        <!--aqui van los archivos de estilis css-->
+    {% endblock extracss %}
+
 </head>
+
 <body>
 
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Minas</div>
+        <div class="list-group list-group-flush">
+            <a href="{% url 'administrador:home' %}" class="list-group-item list-group-item-action bg-light">Inicio</a>
+            {% include 'administrador/_navbar_left.html' %}
+
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        {% include 'administrador/_navbar.html' %}
+
+        {% block content %}
+
+        {% endblock content %}
+
+        <div class="container-fluid">
+
+
+                    {% if messages %}
+                        <br>
+                        {% for message in messages %}
+                            <div {% if message.tags %}
+                                class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+
+        </div>
+
+        {% include '_footer.html' %}
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+{% block extrajs %}
+    <!--aqui van los archivos javascript-->
+{% endblock extrajs %}
+
+
 </body>
+
 </html>

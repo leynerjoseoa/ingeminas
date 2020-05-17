@@ -1,14 +1,32 @@
 from django.contrib import messages
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from empresas.forms import EmpresaForm
 from empresas.models import EmpresaUsuario
 
 
-def home(request):
-    return render(request,'empresas/dashboard.html')
+def home(request, pk_empresa):
+    """devuelve un objeto(Empresa) con la informacion de la misma, si no existe devuelve el objeto vacio
+    requiere recivir por parametro el id de la empresa"""
+    try:
+        empresa = EmpresaUsuario.objects.get(id=pk_empresa)
+    except EmpresaUsuario.DoesNotExist:
+        empresa = None
+        messages.error(request, 'No existe la Empresa', extra_tags='danger')
+    context = {'empresa': empresa}
+    return render(request, 'empresas/presentacion.html',  context)
+
+def presentacion_empresa_egresado(request, pk_empresa):
+    """devuelve un objeto(Empresa) con la informacion de la misma, si no existe devuelve el objeto vacio
+    requiere recivir por parametro el id de la empresa"""
+    try:
+        empresa = EmpresaUsuario.objects.get(id=pk_empresa)
+    except EmpresaUsuario.DoesNotExist:
+        empresa = None
+        messages.error(request, 'No existe la Empresa', extra_tags='danger')
+    context = {'empresa': empresa}
+    return render(request, 'egresados/presentacion_empresa.html',  context)
 
 
 def settings(request):

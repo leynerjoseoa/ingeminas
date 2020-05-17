@@ -1,0 +1,11 @@
+{% extends 'empresas/main.html' %}
+{% load static %}
+{% block content %}
+    <br>
+    <div class="container-fluid">
+        {% if empresa %}
+           <h2 class="mb-5">{{ empresa.name }}</h2>
+            {{ empresa.descripcion | safe }}
+        {% endif %}
+    </div>
+{% endblock content %}

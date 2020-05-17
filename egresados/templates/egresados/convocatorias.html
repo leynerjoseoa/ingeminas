@@ -15,7 +15,7 @@
                             <div class="text-secondary ">
                             <span class="mr-2 ">
                                 <img class="profile-pic-nav" src="{{ element.empresa.foto.url }}"
-                                     alt="foto empresa"> <a href="">{{ element.empresa.name }}</a>
+                                     alt="foto empresa"> <a href="{% url 'empresas:presentacion_empresa' element.empresa.id %}">{{ element.empresa.name }}</a>
                             </span>&bullet;
                                 <span class="">{{ element.fechaCreacion }}</span> &bullet;
                                 {% comment %}<span class=""><span class="fa fa-comments"></span></span>{% endcomment %}

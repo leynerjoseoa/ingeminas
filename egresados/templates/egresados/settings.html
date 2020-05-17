@@ -8,7 +8,6 @@
                 <img class="profile-pic row mx-auto mb-1" src="{{ request.user.egresado.foto.url }}" alt="user pic">
                 <form method="POST" action="" enctype="multipart/form-data">
                     {% csrf_token %}
-
                     <div class="row mb-1">
                         <div class="col-md-3">{{ form.name.label }}</div>
                         <div class="col-md-9">{{ form.name }}</div>
@@ -33,11 +32,9 @@
                         <div class="col-md-3">{{ form.foto.label }}</div>
                         <div class="col-md-9">{{ form.foto }}</div>
                     </div>
-                    <input style="float: right;background-color: #88d8b0" class="btn btn-sm text-white" type="submit"
+                    <input style="float: right;" class="btn btn-sm text-white btn-success" type="submit"
                            name="Update Information" value="guardar">
                 </form>
-
-
             </div>
         </div>
     </div>
