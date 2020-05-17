@@ -1,0 +1,35 @@
+{% extends 'administrador/main.html' %}
+{% load static %}
+{% block content %}
+    <br>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row mb-1">
+                        <div class="col-md-3">{{ form.name.label }}</div>
+                        <div class="col-md-9">{{ form.name }}</div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-3 ">{{ form.email.label }}</div>
+                        <div class="col-md-9">{{ form.email }}</div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-3"><label>Clave del Egresado</label></div>
+                        <div class="col-md-9"><input class="form-control" type="password" placeholder="Ingrese la clave del egresado" name="clave" required></div>
+                    </div>
+
+
+                    <div class="row mb-1">
+                        <div class="col-md-3">{{ form.foto.label }}</div>
+                        <div class="col-md-9">{{ form.foto }}</div>
+                    </div>
+                    <input style="float: right;" class="btn btn-sm text-white btn-success" type="submit"
+                           name="Update Information" value="guardar">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

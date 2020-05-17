@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from egresados.models import Egresado
 
 
-class GraduadoForm(ModelForm):
+class EgresadoForm(ModelForm):
     class Meta:
         model = Egresado
         # fields = '__all__'
@@ -22,13 +22,13 @@ class GraduadoForm(ModelForm):
             'name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Ingresa tu nombre'
+                    'placeholder': 'Ingrese el nombre del egresado'
                 }
             ),
             'email': forms.EmailInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Ingresa tu correo electronico'
+                    'placeholder': 'Ingrese el correo electronico del egresado'
                 }
             ),
             'foto': forms.FileInput(
@@ -39,7 +39,7 @@ class GraduadoForm(ModelForm):
             'descripcion': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Ingresa una breve descripcion de ti',
+                    'placeholder': 'Ingrese una breve descripcion de ti',
                     'cols': 40, 'rows': 2,
                 }
             ),

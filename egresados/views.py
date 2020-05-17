@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from gunicorn import app
 
-from egresados.forms import GraduadoForm
+from egresados.forms import EgresadoForm
 from egresados.models import Egresado
 from empleo.forms import EmpleoForm, EmpresaForm
 from empleo.models import Empleo, Entidad
@@ -18,9 +18,9 @@ def home(request):
 
 def settings(request):
     egresado = request.user.egresado
-    form = GraduadoForm(instance=egresado)
+    form = EgresadoForm(instance=egresado)
     if request.method == 'POST':
-        form = GraduadoForm(request.POST, request.FILES, instance=egresado)
+        form = EgresadoForm(request.POST, request.FILES, instance=egresado)
         if form.is_valid():
             form.save()
             messages.success(request, 'Datos modificados correctamente!')

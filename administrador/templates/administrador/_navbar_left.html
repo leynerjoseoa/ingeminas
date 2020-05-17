@@ -1,0 +1,25 @@
+<div id="menu_padre">
+
+    <a href="" class="list-group-item list-group-item-action bg-light" id="menu_v1" type="button"
+       data-toggle="collapse"
+       data-target="#collapse15" aria-expanded="false">Egresados</a>
+
+    <div id="collapse15" class="collapse" aria-labelledby="menu_v1"
+         data-parent="#menu_padre">
+        <a href="{% url 'administrador:registrar_egresado' %}"
+           class="list-group-item list-group-item-action bg-light">Registrar</a>
+    </div>
+
+    <a href="" class="list-group-item list-group-item-action bg-light" id="menu_v2" type="button"
+       data-toggle="collapse"
+       data-target="#collapse2" aria-expanded="false">Empresas</a>
+
+    <div id="collapse2" class="collapse" aria-labelledby="menu_v2"
+         data-parent="#menu_padre">
+        <a href="#"
+           class="list-group-item list-group-item-action bg-light">Registrar</a>
+    </div>
+
+
+
+</div>
