@@ -50,28 +50,28 @@ class EmpleoForm(models.ModelForm):
         # exclude = ['egresado']
 
 
-# class EmpresaForm(models.ModelForm):
-#     class Meta:
-#         model = Entidad
-#         fields = '__all__'
-#         widgets = {
-#             'nombre': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': 'Nombre de la empresa'
-#                 }
-#             ),
-#             'nit': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': 'NIT de la empresa'
-#                 }
-#             ),
-#             'descripicion': forms.Textarea(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': 'Descripcion de la empresa ',
-#                     'cols': 40, 'rows': 1,
-#                 })
-#         }
-#         exclude = ['estado']
+class EmpresaForm(models.ModelForm):
+    class Meta:
+        model = Entidad
+        fields = '__all__'
+        widgets = {
+            'nombre': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Nombre de la empresa'
+                }
+            ),
+            'nit': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'NIT de la empresa'
+                }
+            ),
+            'descripicion': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Descripcion de la empresa ',
+                    'cols': 40, 'rows': 1,
+                })
+        }
+        exclude = ['estado']

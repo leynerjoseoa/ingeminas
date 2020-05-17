@@ -8,7 +8,7 @@ from gunicorn import app
 
 from egresados.forms import EgresadoForm
 from egresados.models import Egresado
-from empleo.forms import EmpleoForm
+from empleo.forms import EmpleoForm, EmpresaForm
 from empleo.models import Empleo, Entidad
 
 
