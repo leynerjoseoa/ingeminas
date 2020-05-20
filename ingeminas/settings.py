@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'empleo',
     'convocatorias',
     'ckeditor',
+'reportlab',
 ]
 
 MIDDLEWARE = [
@@ -85,22 +86,22 @@ WSGI_APPLICATION = 'ingeminas.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'deuj1pigr2auhb',
-        'HOST': 'ec2-34-202-7-83.compute-1.amazonaws.com',
-        'PORT': '5432',
-        'PASSWORD': '7a51a397bbfbfb28fd1f9066c23e521480be9b7c66f12c4ecf597f9ecc659dc5',
-        'USER': 'mcgajtcyenrjou',
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'mydatabase',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'deuj1pigr2auhb',
+#         'HOST': 'ec2-34-202-7-83.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#         'PASSWORD': '7a51a397bbfbfb28fd1f9066c23e521480be9b7c66f12c4ecf597f9ecc659dc5',
+#         'USER': 'mcgajtcyenrjou',
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

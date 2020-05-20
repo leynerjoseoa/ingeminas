@@ -51,6 +51,10 @@
         {% include 'administrador/_navbar.html' %}
 
         {% block content %}
+            <br>
+            <div class="container-fluid">
+            <a class="btn btn-sm btn-warning" href="{% url 'administrador:listado_egresados_pdf' %}">Egresados PDF</a>
+            </div>
 
         {% endblock content %}
 
