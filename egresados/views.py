@@ -10,11 +10,17 @@ from egresados.forms import EgresadoForm
 from egresados.models import Egresado
 from empleo.forms import EmpleoForm, EmpresaForm
 from empleo.models import Empleo, Entidad
-
+from convocatorias.models import Convocatoria
 
 def home(request):
-    return render(request, 'egresados/main.html')
-
+    pk_egresado = request.user.egresado.id
+    egresado1=Egresado.objects.get(id=pk_egresado)
+    convocatorias=Convocatoria.objects.filter(egresados=egresado1)
+    context={
+            'id_egresado':request.user.egresado.id,
+            'convocatorias':convocatorias
+            }
+    return render(request, 'egresados/main.html',context)
 
 def settings(request):
     egresado = request.user.egresado
@@ -179,51 +185,7 @@ def crear_empresa(request):
     return render(request, 'egresados/crear_empresa.html', context)
 
 
-# backup
-# def crearEmpleo(request, pk):
-#     print('[',request.POST.get('cargo'),']')
-#     if    Empleo.objects.filter(
-#             egresado=Egresado.objects.get(pk=pk),
-#             cargo=request.POST.get('cargo'),
-#             entidad=request.POST.get('entidad')
-#         ).exists():
-#         print('si esiste=========================>')
-#         #si existe un empleo con el mismo nombre y empresa lo edita en lugar de crear uno nuevo
-#         if request.method == 'POST':
-#             empleo =Empleo.objects.filter(
-#                 egresado=Egresado.objects.get(pk=pk),
-#                 cargo=request.POST.get('cargo'),
-#                 entidad=request.POST.get('entidad')
-#                 ).first()
-#             form = EmpleoForm(request.POST, instance=empleo)
-#             if form.is_valid():
-#                 form.save()
-#                 messages.success(request, 'Empleo modificado correctamente')
-#                 return redirect('egresados:crear_empleo', pk=request.user.egresado.id)
-#             else:
-#                 messages.error(request, 'No se ha modificado el empleo', extra_tags='danger')
-#                 return redirect('egresados:crear_empleo', pk=request.user.egresado.id)
-#         else:
-#             print('==> post si existe crearempleo')
-#         print('EXISTE')
-#     else:
-#         form=EmpleoForm()
-#         if request.method == 'POST':
-#             form = EmpleoForm(request.POST)
-#             if form.is_valid():
-#                 test = form.save()
-#                 print(test,'ñ')
-#                 messages.success(request, 'Empleo creado correctamente')
-#                 return redirect('egresados:editar_empleo', test.pk)
-#             else:
-#                 messages.error(request, 'No se ha creado el empleo', extra_tags='danger')
-#                 return redirect('egresados:crear_empleo', pk=request.user.egresado.id)
-#         print('NO EXISTE')
-#
-#     print('va bien')
-#     context = {'form':form}
-#     return render(request, 'egresados/crear_empleo.html', context)
-
 def egresados(request):
     graduates = Egresado.objects.filter(estado=request.GET.get('estado'))
     return JsonResponse(list(graduates.values()), safe=False)
+

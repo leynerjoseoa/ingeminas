@@ -11,7 +11,7 @@ from accounts.decorators import unauthenticated_user
 from accounts.forms import CreateUserForm
 from egresados.models import Egresado
 
-
+"""
 def crear_egresado(request):
     #me = User.objects.create(username='monica',email='monica@gmail.com',password='0Clave0001',is_active=True)
     try:
@@ -33,8 +33,9 @@ def crear_egresado(request):
         return HttpResponse('Integrity Error!')
 
     return HttpResponse('Failed!')
+"""
 
-
+"""
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -42,18 +43,11 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            # group = Group.objects.get(name='customer')
-            # user.groups.add(group)
-            # Customer.objects.create(
-            #     user=user,
-            #     name=user.username,
-            # )
             messages.success(request, 'Account was created for ' + username)
             return redirect('home')
-
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
-
+"""
 
 @login_required(login_url='login')
 @permission_required('accounts.view_egresado', raise_exception=True)

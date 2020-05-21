@@ -1,4 +1,67 @@
 
+<div class="container-fluid">
+   <h1 class="mt-4">Vista Principal Egresados</h1>
+   <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on
+       larger screens. When toggled using the button below, the menu will change.</p>
+   <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is
+       optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which
+       will toggle the menu when clicked.</p>
+</div>
+
+
+
+
+        <div class="container-fluid">
+          <div class="row mx-auto">
+
+
+            <div id="ctorias" class="card mx-auto col-md-6">
+              <br class="mb-1">
+
+                <h5 class=" card-title">convocatorias</h5>
+
+              {% for c in convocatorias %}
+              <div  id="{{c}}"class="">
+                  <div class="card-body">
+
+                    <h5 class="card-title">
+                      <img  class="circle-pic"src="{{c.empresa.foto.url}}" alt=""> {{c.empresa.name}}
+
+                    </h5>
+                    <p class="card-text">{{ c.descripcion }}</p>
+                    <a href="#" onclick="eliminar('{{c}}')" class="btn btn-sm  btn-warning float-right">ocultar</a>
+
+                    <a href="{% url 'convocatorias:ver' c.id %}" class="btn btn-sm  btn-primary float-right mr-1">ver</a>
+
+
+
+                  </div><br>
+                <div class="dropdown-divider"></div>
+              </div>
+              {% endfor %}
+
+
+
+            </div>
+
+            <div class="card mx-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-sm  btn-warning">ver</a>
+
+                  <a href="#" class="btn btn-sm  btn-success">dislike</a>
+
+                  <a href="#" class="btn btn-sm  btn-danger">eliminar</a>
+
+                </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
 
          <div class="container-fluid">
             <h1 class="mt-4">Vista Principal Egresados</h1>
@@ -9,12 +72,17 @@
                 will toggle the menu when clicked.</p>
         </div>
 
-         <div class="container-fluid">
-            <h1 class="mt-4">Vista Principal Egresados</h1>
-            <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on
-                larger screens. When toggled using the button below, the menu will change.</p>
-            <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is
-                optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which
-                will toggle the menu when clicked.</p>
-        </div>
+<script type="text/javascript">
+function eliminar(id){
+    document.getElementById("ctorias")
+            .removeChild(document.getElementById(id));
 
+}
+</script>
+
+<style media="screen">
+  .circle-pic{
+    width:30px;
+    height:30px;
+  }
+</style>
