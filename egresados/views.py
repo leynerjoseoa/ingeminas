@@ -184,8 +184,12 @@ def crear_empresa(request):
     context = {'form': form, 'empresas': Entidad.objects.all()}
     return render(request, 'egresados/crear_empresa.html', context)
 
-
 def egresados(request):
     graduates = Egresado.objects.filter(estado=request.GET.get('estado'))
     return JsonResponse(list(graduates.values()), safe=False)
 
+
+def egresados(request):
+    graduates = Egresado.objects.all()
+    print(graduates)
+    return JsonResponse(list(graduates.values()), safe=False)

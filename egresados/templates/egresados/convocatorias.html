@@ -1,128 +1,209 @@
-{% extends 'egresados/main.html' %}
-{% load static %}
+{% extends 'egresados/main.html' %} {% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"
+/>
 
-{% block content %}
-    <br>
-    <div class="container-fluid">
-        {% if convocatorias %}
+<script
+  type="text/javascript"
+  charset="utf8"
+  src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"
+></script>
+<br />
+<div class="container-fluid">
+  {% if convocatorias %}
 
-            <div class="row mx-auto">
-
-                {% for element in convocatorias %}
-                    <div class="card mb-2 mx-auto" style="width: 18rem;">
-                        <a href="{% url 'convocatorias:ver' element.id %}"><img src="{{ element.imagen }}" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                            <div class="text-secondary ">
-                            <span class="mr-2 ">
-                                <img class="profile-pic-nav" src="{{ element.empresa.foto.url }}"
-                                     alt="foto empresa"> <a href="{% url 'empresas:presentacion_empresa' element.empresa.id %}">{{ element.empresa.name }}</a>
-                            </span>&bullet;
-                                <span class="">{{ element.fechaCreacion }}</span> &bullet;
-                                {% comment %}<span class=""><span class="fa fa-comments"></span></span>{% endcomment %}
-                            </div>
-                            <h2><a href="{% url 'convocatorias:ver' element.id %}">
-                                {{ element.descripcion }}
-                            </a></h2>
-                        </div>
-                    </div>
-                {% endfor %}
-
-            </div>
-
-        {% else %}
-
-        {% endif %}
-
-
+  <div class="row mx-auto">
+    {% for element in convocatorias %}
+    <div class="card mb-2 mx-auto" style="width: 18rem;">
+      <a href="{% url 'convocatorias:ver' element.id %}"
+        ><img src="{{ element.imagen }}" class="card-img-top" alt="..."
+      /></a>
+      <div class="card-body">
+        <div class="text-secondary">
+          <span class="mr-2">
+            <img
+              class="profile-pic-nav"
+              src="{{ element.empresa.foto.url }}"
+              alt="foto empresa"
+            />
+            <a
+              href="{% url 'empresas:presentacion_empresa' element.empresa.id %}"
+              >{{ element.empresa.name }}</a
+            > </span
+          >&bullet; <span class="">{{ element.fechaCreacion }}</span> &bullet;
+        </div>
+        <h2>
+          <a href="{% url 'convocatorias:ver' element.id %}">
+            {{ element.descripcion }}
+          </a>
+        </h2>
+      </div>
     </div>
+    {% endfor %}
+  </div>
 
-    {% comment %}<div class="container">
-        {% if convocatorias %}
+  {% else %} {% endif %}
+</div>
 
-            <div class="row blog-entries">
-            <div class="col-md-12 col-lg-12 main-content">
-            <div class="row">
-            {% for element in convocatorias %}
-                <div class="col-md-4">
-                    <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                        <img src="{{ element.imagen }}" alt="Image placeholder" height="200" width="600">
-                        <div class="blog-content-body">
-                            <div class="post-meta">
-                                <span class="author mr-2"><img class="profile-pic-nav"
-                                                               src="{{ element.empresa.foto.url }}"
-                                                               alt="Colorlib"> {{ element.autor }}</span>&bullet;
-                                <span class="mr-2">{{ element.fechaCreacion }}</span> &bullet;
-                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                            </div>
-                            <h2>{{ element.titulo }}</h2>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-        {% else %}
-            <div class="text-center	">
-                <span>No se encontro ninguna convocatoria.</span>
+<br />
+<div class="container-fluid">
+  <table id="tbl_entidad" class="display">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Email</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody id="t_body"></tbody>
+  </table>
+</div>
+
+<script>
+
+  fetch("{% url 'egresados:egresados' %}")
+    .then((response) => response.json())
+    .then((response) => {
+
+      let datos = "";
+      for (let i = 0; i < response.length; i++) {
+        let tr = document.createElement("tr");
+        tr.className += "odd";
+        let id = document.createElement("td");
+        let nombre = document.createElement("td");
+        let estado = document.createElement("td");
+        let email = document.createElement("td");
+        let opciones = document.createElement("td");
+        let ver = document.createElement("button");
+        let eliminar = document.createElement("button");
+
+        id.textContent = i + 1;
+        nombre.textContent = response[i]["name"];
+        estado.textContent = response[i]["estado"];
+        email.textContent = response[i]["email"];
+
+        eliminar.className += "btn btn-sm btn-danger fas fa-trash-alt  float-right";
+        ver.className = "btn btn-sm btn-primary fas fa-eye mr-1 float-right";
+
+        opciones.append(eliminar);
+        opciones.append(ver);
+
+        tr.appendChild(id);
+        tr.appendChild(nombre);
+        tr.appendChild(estado);
+        tr.appendChild(email);
+        tr.appendChild(opciones);
+
+        document.getElementById("t_body").appendChild(tr);
+      }
+
+      $(document).ready(function () {
+        $("#tbl_entidad").DataTable({
+          language: {
+            search: "Buscar",
+            emptyTable: "No hay informacion.",
+            thousands: ",",
+            infoFiltered: "(Filtrado de _MAX_ total entradas)",
+            processing: "Procesando...",
+            info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+            lengthMenu: "Mostrar _MENU_ Entradas",
+            paginate: {
+              first: "Primero",
+              previous: "Anterior",
+              next: "Siguiente",
+              last: "ultimo",
+            },
+          },
+        });
+      });
+    });
+</script>
+
+<script>
+  $(document).ready(function () {
+    $("#table_id").DataTable();
+  });
+</script>
+
+{% comment %}
+<div class="container">
+  {% if convocatorias %}
+
+  <div class="row blog-entries">
+    <div class="col-md-12 col-lg-12 main-content">
+      <div class="row">
+        {% for element in convocatorias %}
+        <div class="col-md-4">
+          <a
+            href="#"
+            class="blog-entry element-animate"
+            data-animate-effect="fadeIn"
+          >
+            <img
+              src="{{ element.imagen }}"
+              alt="Image placeholder"
+              height="200"
+              width="600"
+            />
+            <div class="blog-content-body">
+              <div class="post-meta">
+                <span class="author mr-2"
+                  ><img
+                    class="profile-pic-nav"
+                    src="{{ element.empresa.foto.url }}"
+                    alt="Colorlib"
+                  />
+                  {{ element.autor }}</span
+                >&bullet;
+                <span class="mr-2">{{ element.fechaCreacion }}</span> &bullet;
+                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+              </div>
+              <h2>{{ element.titulo }}</h2>
             </div>
+          </a>
+        </div>
+        {% endfor %} {% else %}
+        <div class="text-center">
+          <span>No se encontro ninguna convocatoria.</span>
+        </div>
         {% endif %}
-        </div>{% endcomment %}
-
-    {% comment %}      <div class="row mt-5">
-
-         {% if posts.has_previous %}
-         <div class="col-2 mx-auto">
-            <a class="btn btn-sm btn-info mb-2"
-            href="?page={{ posts.previous_page_number}}{% if request.GET.barra_busqueda %}&q={{request.GET.barra_busqueda}}{% endif %}">Anterior</a>
-         </div>
-         {% endif %}
-          {% if posts.has_next %}
-         <div class="col-2 mx-auto">
-            <a class="btn btn-sm btn-info mb-2" href="?page={{ posts.next_page_number}}{% if request.GET.barra_busqueda %}&q={{request.GET.barra_busqueda}}{% endif %}">Siguiente</a>
-         </div>
-         {% endif %}
-
-      </div>  </div>{% endcomment %}
-
-
-
-
-
-
-
-
-
-
-    {% comment %}
-    <br>
-    <div class="container-fluid">
+      </div>
+      {% endcomment %} {% comment %}
+      <br />
+      <div class="container-fluid">
         <table class="table border table-hover" id="table_empleos">
-            <thead>
+          <thead>
             <tr class="table-info text-uppercase">
-                <th>Titulo</th>
-                <th>Descripcion</th>
-                <th>Opciones</th>
-
-
+              <th>Titulo</th>
+              <th>Descripcion</th>
+              <th>Opciones</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             {% for element in convocatorias %}
-                <tr id="tr_{{ element.id }}">
-                    <td> {{ element.titulo }}</td>
-                    <td> {{ element.descripcion }}</td>
-                    <td>
-                        <a href="{% url 'convocatorias:editar' element.id %}"
-                           class="btn btn-sm btn-primary"><span class="fa fa-eye"></span></a>
-                        <a type="button" class="text-white btn btn-sm btn-danger">
-                            <span class="fa fa-trash"></span>
-                        </a>
-                    </td>
-
-                </tr>
+            <tr id="tr_{{ element.id }}">
+              <td>{{ element.titulo }}</td>
+              <td>{{ element.descripcion }}</td>
+              <td>
+                <a
+                  href="{% url 'convocatorias:editar' element.id %}"
+                  class="btn btn-sm btn-primary"
+                  ><span class="fa fa-eye"></span
+                ></a>
+                <a type="button" class="text-white btn btn-sm btn-danger">
+                  <span class="fa fa-trash"></span>
+                </a>
+              </td>
+            </tr>
             {% endfor %}
-            </tbody>
-
+          </tbody>
         </table>
-
-    </div>{% endcomment %}
-
-{% endblock content %}
+      </div>
+      {% endcomment %} {% endblock content %}
+    </div>
+  </div>
+</div>
