@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from egresados.models import Egresado
+from egresados.models import Egresado, Document
 
 
 class EgresadoForm(ModelForm):
@@ -58,3 +58,8 @@ class EgresadoForm(ModelForm):
         }
 
         exclude = ['user']
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ('egresado', 'document', )

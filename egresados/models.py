@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from django.utils.datetime_safe import datetime
 
 """se usa el parámetro blank=True en campos tipo Texto o null=True para campos tipo Fecha o Numéricos."""
 
@@ -19,7 +18,12 @@ class Egresado(models.Model):
         ('empleado', 'empleado'),
         ('desempleado', 'desempleado'),
     )
-    estado = models.CharField(max_length=200, null=False, choices=ESTADO, blank=False)
 
     def __str__(self):
         return self.name
+class Document(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    egresado = models.OneToOneField(Egresado, on_delete=models.CASCADE)
+    #document = models.FileField(upload_to='documents/')
+    document = models.FileField(upload_to='Archivos/egresados')
+    uploaded_at = models.DateTimeField(auto_now_add=True)

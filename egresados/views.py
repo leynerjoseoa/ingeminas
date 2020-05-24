@@ -1,20 +1,18 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
-# Create your views here.
-from django.urls import reverse_lazy
-from django.views.decorators.csrf import csrf_exempt
-from gunicorn import app
 
-from egresados.forms import EgresadoForm
-from egresados.models import Egresado
+# Create your views here.
+from egresados.forms import EgresadoForm, DocumentForm
+from egresados.models import Egresado, Document
 from empleo.forms import EmpleoForm, EmpresaForm
 from empleo.models import Empleo, Entidad
 from convocatorias.models import Convocatoria
 
+
 def home(request):
     pk_egresado = request.user.egresado.id
-    egresado1=Egresado.objects.get(id=pk_egresado)
+    egresado1= Egresado.objects.get(id= pk_egresado)
     convocatorias=Convocatoria.objects.filter(egresados=egresado1)
     context={
             'id_egresado':request.user.egresado.id,
@@ -57,18 +55,6 @@ def empleo(request, pk):
     return render(request, 'egresados/empleo.html', context)
 
 
-# def eliminarEmpleo(request,pk_empleo):
-#     empleo1 = Empleo.objects.get(pk=pk_empleo)
-#     empleo1.delete()
-#     return redirect('egresados:empleos')
-# def eliminarEmpleo(request,pk_empleo):
-#     empleo1 = Empleo.objects.get(pk=pk_empleo)
-#     if request.method == 'POST':
-#         empleo1.delete()
-#         return redirect('egresados:empleos')
-#     context={'item':empleo1}
-#     return render(request, 'egresados/eliminar_empleo.html', context)
-# @csrf_exempt
 def eliminarEmpleo(request, pk_empleo):
     print('#DELETE#', pk_empleo, ']')
     print('#DELETE#', request.POST.get('c_sesion'), ']')
@@ -83,8 +69,6 @@ def eliminarEmpleo(request, pk_empleo):
     if request.method == 'GET':
         context = {'item': empleo1}
     return render(request, template_name, context)
-
-    ##########################  FIN DELETE ############################
 
 
 def editarEmpleo(request, pk_empleo):
@@ -101,7 +85,6 @@ def editarEmpleo(request, pk_empleo):
     else:
         form = EmpleoForm(instance=empleo1)
     context = {'form': form, 'empleo': empleo1}
-    # return render(request, 'egresados/modal_editar_empleo.html', context)
     return render(request, 'egresados/editar_empleo.html', context)
 
 
@@ -193,3 +176,35 @@ def egresados(request):
     graduates = Egresado.objects.all()
     print(graduates)
     return JsonResponse(list(graduates.values()), safe=False)
+
+
+def model_form_upload(request):
+    if request.method == 'POST':
+        doc = Document.objects.get(egresado=Egresado.objects.get(id=request.user.egresado.id))
+        egresado1=Egresado.objects.get(id=request.user.egresado.id)
+        form = DocumentForm(request.POST, request.FILES,instance=doc)
+        print('post data')
+        print(request.POST)
+        print('fin data')
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Hoja de vida modificada correctamente!')
+            return redirect('egresados:subir_cv')
+        else:
+            print(form.errors)
+            messages.error(request, form.errors, extra_tags='danger')
+
+        return render(request,'egresados/main.html')
+    if request.method == 'GET':
+        egresado=Egresado.objects.get(id=request.user.egresado.id)
+        try:
+            doc = Document.objects.get(egresado=Egresado.objects.get(id=request.user.egresado.id))
+            form = DocumentForm(instance=doc)
+
+            return render(request,'egresados/subir_cv.html',{'cv':doc,'form':form,'egresado':egresado})
+        except Document.DoesNotExist:
+            print(' no existe documento aun')
+            form = DocumentForm()
+            return render(request,'egresados/subir_cv.html',{'form':form,'egresado':egresado})
+    else:
+        return HttpResponse('Quieres modificar o cargar tu hoja de vida?')

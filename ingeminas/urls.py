@@ -18,7 +18,8 @@ from django.urls import path, include
 # librerias para estaticos
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.conf.urls import url
+from egresados.views import model_form_upload
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('egresados/', include(('egresados.urls', 'egresados'))),
@@ -26,7 +27,7 @@ urlpatterns = [
     path('empresas/', include(('empresas.urls', 'empresas'))),
     path('empleo/', include(('empleo.urls', 'empleos'))),
     path('convocatorias/', include(('convocatorias.urls', 'convocatorias'))),
-    path('', include('accounts.urls')),
+url(r'^uploads/form/$', model_form_upload, name='model_form_upload'),    path('', include('accounts.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

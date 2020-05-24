@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'empleo',
     'convocatorias',
     'ckeditor',
-'reportlab',
+    'reportlab',
 ]
 
 MIDDLEWARE = [

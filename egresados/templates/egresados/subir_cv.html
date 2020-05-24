@@ -1,0 +1,44 @@
+{% extends 'egresados/main.html' %}
+
+{% block content %}
+<br>
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-body">
+
+  <form method="post" enctype="multipart/form-data">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        <div class="row mb-1">
+                          <div class="col-md-3">{{form.document.label}}</div>
+                            <div class="col-md-9">{{ form.document }}</div>
+                        </div>
+                        <div class="row mb-1"id="egresado_data" >
+                            <div class="col-md-3">egresado</div>
+                            <div class="col-md-9">
+                              <select id="id_egresado" name="egresado">
+                                <option value="{{egresado.id}}" select>{{egresado}}</option>
+                              </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="text-muted">
+                        <input class="btn btn-sm btn-success text-white" type="submit" style="float: right"
+                               value="guardar">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+  <script>
+    hideElement("egresado_data");
+  function hideElement(id) {
+    let elementToHide = document.getElementById(id).style.display="none";
+    }
+  </script>
+{% endblock %}
