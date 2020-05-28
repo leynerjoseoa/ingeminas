@@ -12,13 +12,14 @@ from convocatorias.models import Convocatoria
 
 def home(request):
     pk_egresado = request.user.egresado.id
-    egresado1= Egresado.objects.get(id= pk_egresado)
-    convocatorias=Convocatoria.objects.filter(egresados=egresado1)
-    context={
-            'id_egresado':request.user.egresado.id,
-            'convocatorias':convocatorias
-            }
-    return render(request, 'egresados/main.html',context)
+    egresado1 = Egresado.objects.get(id=pk_egresado)
+    convocatorias = Convocatoria.objects.filter(egresados=egresado1)
+    context = {
+        'id_egresado': request.user.egresado.id,
+        'convocatorias': convocatorias
+    }
+    return render(request, 'egresados/main.html', context)
+
 
 def settings(request):
     egresado = request.user.egresado
@@ -50,7 +51,7 @@ def empleo(request, pk):
         form = EmpleoForm(request.POST, instance=empleo)
         if form.is_valid():
             form.save()
-            return redirect('egresados:empleos')  # aqui lo cambieredirect('egresados:empleos')
+            return redirect('egresados:empleos')
     context = {'empleo': empleo, 'form': form}
     return render(request, 'egresados/empleo.html', context)
 
@@ -106,30 +107,6 @@ def crearEmpleo(request):
     return render(request, 'egresados/crear_empleo.html', context)
 
 
-# def crearEmpleo(request, pk):
-#     empresas = Entidad.objects.all()
-#     print('va bien')
-#     #request.POST += Egresado.objects.get(pk=request.user.egresado.pk)
-#     print(request.POST)
-#     egresado = Egresado.objects.get(id=pk)
-#     # EmpleoFormSet = inlineformset_factory(Egresado, Order, fields=('product', 'status'), extra=5)
-#     form = EmpleoForm()
-#     if request.method == 'POST':
-#         #empresa = Entidad.objects.get(pk=request.POST.get('entidad'))
-#         #print(empresa.nombre)
-#         request.POST
-#         form = EmpleoForm(request.POST)
-#         print(form)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Empleo creado correctamente')
-#             redirect('egresados:empleos')
-#         else:
-#             messages.error(request, 'No se ha creado el empleo', extra_tags='danger')
-#             redirect('egresados:empleos')
-#     context = {'form':form,'empresas':empresas}
-#     return render(request, 'egresados/crear_empleo.html', context)
-
 def crear_empresa(request):
     if Entidad.objects.filter(pk=request.POST.get('nit')).exists():
         # acciones cuando la entidad ya existe
@@ -167,44 +144,52 @@ def crear_empresa(request):
     context = {'form': form, 'empresas': Entidad.objects.all()}
     return render(request, 'egresados/crear_empresa.html', context)
 
+
 def egresados(request):
     graduates = Egresado.objects.filter(estado=request.GET.get('estado'))
     return JsonResponse(list(graduates.values()), safe=False)
 
 
-def egresados(request):
-    graduates = Egresado.objects.all()
-    print(graduates)
-    return JsonResponse(list(graduates.values()), safe=False)
+# def egresados2(request):
+#     graduates = Egresado.objects.all()
+#     print(graduates)
+#     return JsonResponse(list(graduates.values()), safe=False)
 
 
 def model_form_upload(request):
     if request.method == 'POST':
-        doc = Document.objects.get(egresado=Egresado.objects.get(id=request.user.egresado.id))
-        egresado1=Egresado.objects.get(id=request.user.egresado.id)
-        form = DocumentForm(request.POST, request.FILES,instance=doc)
-        print('post data')
-        print(request.POST)
-        print('fin data')
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Hoja de vida modificada correctamente!')
-            return redirect('egresados:subir_cv')
-        else:
-            print(form.errors)
-            messages.error(request, form.errors, extra_tags='danger')
+        try:
+            doc = Document.objects.get(egresado=Egresado.objects.get(id=request.user.egresado.id))
+            egresado1 = Egresado.objects.get(id=request.user.egresado.id)
+            form = DocumentForm(request.POST, request.FILES, instance=doc)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Hoja de vida modificada correctamente!')
+                return redirect('egresados:subir_cv')
+            else:
+                print(form.errors)
+                messages.error(request, form.errors, extra_tags='danger')
+        except Document.DoesNotExist:
+            form = DocumentForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Hoja de vida modificada correctamente!')
+                return redirect('egresados:subir_cv')
+            else:
+                print(form.errors)
+                messages.error(request, form.errors, extra_tags='danger')
+        return render(request, 'egresados/main.html')
 
-        return render(request,'egresados/main.html')
     if request.method == 'GET':
-        egresado=Egresado.objects.get(id=request.user.egresado.id)
+        egresado = Egresado.objects.get(id=request.user.egresado.id)
         try:
             doc = Document.objects.get(egresado=Egresado.objects.get(id=request.user.egresado.id))
             form = DocumentForm(instance=doc)
 
-            return render(request,'egresados/subir_cv.html',{'cv':doc,'form':form,'egresado':egresado})
+            return render(request, 'egresados/subir_cv.html', {'cv': doc, 'form': form, 'egresado': egresado})
         except Document.DoesNotExist:
             print(' no existe documento aun')
             form = DocumentForm()
-            return render(request,'egresados/subir_cv.html',{'form':form,'egresado':egresado})
+            return render(request, 'egresados/subir_cv.html', {'form': form, 'egresado': egresado})
     else:
         return HttpResponse('Quieres modificar o cargar tu hoja de vida?')

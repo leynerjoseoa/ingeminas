@@ -1,135 +1,8 @@
-{% extends 'egresados/main.html' %} {% load static %} {% block content %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"
-/>
+{% extends 'egresados/main.html' %} {% load static %}
+{% block content %}
 
-<script
-  type="text/javascript"
-  charset="utf8"
-  src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"
-></script>
-<br />
-<div class="container-fluid">
-  {% if convocatorias %}
 
-  <div class="row mx-auto">
-    {% for element in convocatorias %}
-    <div class="card mb-2 mx-auto" style="width: 18rem;">
-      <a href="{% url 'convocatorias:ver' element.id %}"
-        ><img src="{{ element.imagen }}" class="card-img-top" alt="..."
-      /></a>
-      <div class="card-body">
-        <div class="text-secondary">
-          <span class="mr-2">
-            <img
-              class="profile-pic-nav"
-              src="{{ element.empresa.foto.url }}"
-              alt="foto empresa"
-            />
-            <a
-              href="{% url 'empresas:presentacion_empresa' element.empresa.id %}"
-              >{{ element.empresa.name }}</a
-            > </span
-          >&bullet; <span class="">{{ element.fechaCreacion }}</span> &bullet;
-        </div>
-        <h2>
-          <a href="{% url 'convocatorias:ver' element.id %}">
-            {{ element.descripcion }}
-          </a>
-        </h2>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
 
-  {% else %} {% endif %}
-</div>
-
-<br />
-<div class="container-fluid">
-  <table id="tbl_entidad" class="display">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Estado</th>
-        <th>Email</th>
-        <th>Opciones</th>
-      </tr>
-    </thead>
-    <tbody id="t_body"></tbody>
-  </table>
-</div>
-
-<script>
-
-  fetch("{% url 'egresados:egresados' %}")
-    .then((response) => response.json())
-    .then((response) => {
-
-      let datos = "";
-      for (let i = 0; i < response.length; i++) {
-        let tr = document.createElement("tr");
-        tr.className += "odd";
-        let id = document.createElement("td");
-        let nombre = document.createElement("td");
-        let estado = document.createElement("td");
-        let email = document.createElement("td");
-        let opciones = document.createElement("td");
-        let ver = document.createElement("button");
-        let eliminar = document.createElement("button");
-
-        id.textContent = i + 1;
-        nombre.textContent = response[i]["name"];
-        estado.textContent = response[i]["estado"];
-        email.textContent = response[i]["email"];
-
-        eliminar.className += "btn btn-sm btn-danger fas fa-trash-alt  float-right";
-        ver.className = "btn btn-sm btn-primary fas fa-eye mr-1 float-right";
-
-        opciones.append(eliminar);
-        opciones.append(ver);
-
-        tr.appendChild(id);
-        tr.appendChild(nombre);
-        tr.appendChild(estado);
-        tr.appendChild(email);
-        tr.appendChild(opciones);
-
-        document.getElementById("t_body").appendChild(tr);
-      }
-
-      $(document).ready(function () {
-        $("#tbl_entidad").DataTable({
-          language: {
-            search: "Buscar",
-            emptyTable: "No hay informacion.",
-            thousands: ",",
-            infoFiltered: "(Filtrado de _MAX_ total entradas)",
-            processing: "Procesando...",
-            info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-            lengthMenu: "Mostrar _MENU_ Entradas",
-            paginate: {
-              first: "Primero",
-              previous: "Anterior",
-              next: "Siguiente",
-              last: "ultimo",
-            },
-          },
-        });
-      });
-    });
-</script>
-
-<script>
-  $(document).ready(function () {
-    $("#table_id").DataTable();
-  });
-</script>
-
-{% comment %}
 <div class="container">
   {% if convocatorias %}
 
@@ -172,7 +45,7 @@
         </div>
         {% endif %}
       </div>
-      {% endcomment %} {% comment %}
+      {% comment %}
       <br />
       <div class="container-fluid">
         <table class="table border table-hover" id="table_empleos">
@@ -202,8 +75,8 @@
             {% endfor %}
           </tbody>
         </table>
-      </div>
-      {% endcomment %} {% endblock content %}
-    </div>
-  </div>
+      </div> {% endcomment %}
+      {% endblock content %}
+</div>
+</div>
 </div>

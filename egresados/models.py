@@ -18,7 +18,7 @@ class Egresado(models.Model):
         ('empleado', 'empleado'),
         ('desempleado', 'desempleado'),
     )
-
+    estado = models.CharField(max_length=200, null=False, choices=ESTADO, blank=False)
     def __str__(self):
         return self.name
 class Document(models.Model):
