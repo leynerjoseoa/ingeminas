@@ -88,7 +88,7 @@ def listado_egresados_pdf(request):
 
 def registrar_egresado(request):
     if request.method == 'GET':
-        form = EgresadoForm()
+        form = EgresadoForm(request.POST)
     elif request.method == 'POST':
         try:
             user = User(
@@ -112,7 +112,7 @@ def registrar_egresado(request):
 
 def registrar_empresa(request):
     if request.method == 'GET':
-        form = EmpresaForm()
+        form = EmpresaForm(request.POST)
     elif request.method == 'POST':
         try:
             user = User(
