@@ -11,7 +11,7 @@
       <div class="row">
         {% for element in convocatorias %}
         <div class="col-md-4">
-          <a href="{% url 'convocatorias:ver' element.id %}"
+          <a class="text-secondary" href="{% url 'convocatorias:ver' element.id %}"
             class="blog-entry element-animate"
             data-animate-effect="fadeIn">
             <img src="{{ element.imagen }}"
@@ -22,7 +22,7 @@
               <div class="post-meta">
                 <span class="author mr-2">
                 <img class="profile-pic-nav"
-                    src="{{ element.empresa.foto }}" alt=""/>
+                    src="{{ element.empresa.foto.url }}" alt=""/>
                   {{ element.empresa.name }}</span>&bullet;
                 <span class="mr-2">{{ element.fechaCreacion }}</span> &bullet;
                 <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
