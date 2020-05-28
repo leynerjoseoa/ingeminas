@@ -11,27 +11,19 @@
       <div class="row">
         {% for element in convocatorias %}
         <div class="col-md-4">
-          <a
-            href="{% url 'convocatorias:ver' element.id %}"
+          <a href="{% url 'convocatorias:ver' element.id %}"
             class="blog-entry element-animate"
-            data-animate-effect="fadeIn"
-          >
-            <img
-              src="{{ element.imagen }}"
+            data-animate-effect="fadeIn">
+            <img src="{{ element.imagen }}"
               alt="Image placeholder"
               height="200"
-              width="600"
-            />
+              width="600"/>
             <div class="blog-content-body">
               <div class="post-meta">
-                <span class="author mr-2"
-                  ><img
-                    class="profile-pic-nav"
-                    src="{{ element.empresa.foto.url }}"
-                    alt="Colorlib"
-                  />
-                  {{ element.autor }}</span
-                >&bullet;
+                <span class="author mr-2">
+                <img class="profile-pic-nav"
+                    src="{{ element.empresa.foto }}" alt=""/>
+                  {{ element.empresa.name }}</span>&bullet;
                 <span class="mr-2">{{ element.fechaCreacion }}</span> &bullet;
                 <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
               </div>
@@ -39,12 +31,14 @@
             </div>
           </a>
         </div>
-        {% endfor %} {% else %}
+        {% endfor %} 
+        {% else %}
         <div class="text-center">
           <span>No se encontro ninguna convocatoria.</span>
         </div>
         {% endif %}
       </div>
+      
       {% comment %}
       <br />
       <div class="container-fluid">
@@ -75,7 +69,8 @@
             {% endfor %}
           </tbody>
         </table>
-      </div> {% endcomment %}
+      </div> 
+      {% endcomment %}
       {% endblock content %}
 </div>
 </div>
