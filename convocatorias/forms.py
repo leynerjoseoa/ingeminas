@@ -27,7 +27,7 @@ class ConvocatoriaForm(ModelForm):
                     'placeholder': 'Ingresa una descripcion'
                 }
             ),
-            'titulo': forms.TextInput(
+            'imagen': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Ingresa la url de miniatura para la convocatoria'
