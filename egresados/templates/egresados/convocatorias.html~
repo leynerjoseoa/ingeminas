@@ -12,7 +12,7 @@
         {% for element in convocatorias %}
         <div class="col-md-4">
           <a
-            href="{% url 'convocatorias:convocatorias_egresado' request.user.egresado.id %}"
+            href="{% url 'egresados:convocatorias_egresado' request.user.egresado.id %}"
             class="blog-entry element-animate"
             data-animate-effect="fadeIn"
           >
