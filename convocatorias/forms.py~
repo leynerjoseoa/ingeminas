@@ -11,7 +11,7 @@ class ConvocatoriaForm(ModelForm):
 
     class Meta:
         model = Convocatoria
-        fields = ['titulo', 'descripcion', 'contenido','empresa','egresados','imagen']
+        fields = ['titulo', 'descripcion', 'contenido','empresa','egresados']
         # content = forms.CharField(widget=CKEditorWidget())
         # contenido = forms.CharField(widget=CKEditorWidget())
 
@@ -25,12 +25,6 @@ class ConvocatoriaForm(ModelForm):
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Ingresa una descripcion'
-                }
-            ),
-            'titulo': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingresa la url de miniatura para la convocatoria'
                 }
             ),
 
