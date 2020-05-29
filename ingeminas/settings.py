@@ -89,11 +89,11 @@ WSGI_APPLICATION = 'ingeminas.wsgi.application'
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': 'deuj1pigr2auhb',
-         'HOST': 'ec2-34-202-7-83.compute-1.amazonaws.com',
+         'NAME': 'dd7hhrm72ajcn8',
+         'HOST': 'ec2-52-202-22-140.compute-1.amazonaws.com',
          'PORT': '5432',
-         'PASSWORD': '7a51a397bbfbfb28fd1f9066c23e521480be9b7c66f12c4ecf597f9ecc659dc5',
-         'USER': 'mcgajtcyenrjou',
+         'PASSWORD': 'c6f9c14952133156ff190d449f07adba252b121f323a4a3d390097c715ff249f',
+         'USER': 'ethqeugybwotuw',
      }
  }
 #DATABASES = {
